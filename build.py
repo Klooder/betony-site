@@ -234,6 +234,10 @@ def page(meta: dict, markdown: str) -> str:
         f'<meta name="apple-itunes-app" content="app-id=6813134795">\n'
         + structured_data(meta, url))
     robots = '<meta name="robots" content="noindex">\n' if is_404 else ""
+    if is_home:
+        # Google Search Console ownership; keep it, or the property stops being verified.
+        robots += '<meta name="google-site-verification" content="K2qzudUGoRobqem0MvwjoKvL5TuLfc5GnV8nQp2NCn0">\n'
+
     return f"""<!doctype html>
 <html lang="en">
 <head>
