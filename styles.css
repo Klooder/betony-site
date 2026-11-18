@@ -118,3 +118,7 @@ footer ul {
 main {
   overflow-wrap: anywhere;
 }
+
+.small {
+  font-size: 0.9375rem;
+}
