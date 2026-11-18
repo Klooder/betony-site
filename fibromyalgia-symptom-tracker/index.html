@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#FAF6F0" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#181611" media="(prefers-color-scheme: dark)">
 <meta name="description" content="A fibromyalgia symptom tracker for iPhone. Log widespread pain, fibro fog, stiffness and sleep quality in under 30 seconds, with big buttons and no typing.">
 <title>Fibromyalgia Symptom Tracker: Pain &amp; Fibro Fog | Betony</title>
 <link rel="canonical" href="https://betonyapp.com/fibromyalgia-symptom-tracker/">
@@ -12,6 +14,7 @@
 <meta property="og:title" content="Fibromyalgia Symptom Tracker: Pain &amp; Fibro Fog | Betony">
 <meta property="og:description" content="A fibromyalgia symptom tracker for iPhone. Log widespread pain, fibro fog, stiffness and sleep quality in under 30 seconds, with big buttons and no typing.">
 <meta property="og:url" content="https://betonyapp.com/fibromyalgia-symptom-tracker/">
+<meta property="og:image" content="https://betonyapp.com/img/1-today-light.jpg">
 <meta name="apple-itunes-app" content="app-id=6813134795">
 <script type="application/ld+json">
 {
@@ -33,14 +36,20 @@
  }
 }
 </script>
+<link rel="icon" href="/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;700;800&display=swap">
 <link rel="stylesheet" href="/styles.css">
 </head>
-<body>
-<div class="page">
-<header>
-<a class="site-name" href="/">Betony</a>
+<body class="inner">
+<header class="site-header">
+<a class="brand" href="/"><img src="/img/icon.png" width="36" height="36" alt="">Betony</a>
+<nav aria-label="Main"><a href="/guides/">Guides</a><a class="button button-small" href="https://apps.apple.com/us/app/betony-symptom-tracker/id6813134795">Get the app</a></nav>
 </header>
 <main>
+<article class="prose">
 <h1>A fibromyalgia tracker you can use on a flare day</h1>
 <p class="small">Updated <time datetime="2026-11-18">November 18, 2026</time></p>
 <p>Fibromyalgia symptoms can suddenly improve or get worse, according to the NHS. That makes them hard to recall weeks later. Betony is designed for the days when typing hurts and focus is short: a full log takes under 30 seconds, with large tap targets.</p>
@@ -63,10 +72,19 @@
 <p>Log medications with optional reminders. Betony Pro adds a doctor report and longer trends, built only from your own entries.</p>
 <h2>Private</h2>
 <p>No account, data kept on your iPhone, free CSV export. Read the <a href="/privacy/">privacy policy</a>.</p>
-<h2>Get Betony</h2>
-<p>Free on the <a href="https://apps.apple.com/us/app/betony-symptom-tracker/id6813134795">App Store</a>. For background on the condition, read <a href="/what-is-fibromyalgia/">What is fibromyalgia?</a></p>
+<h2>About the condition</h2>
+<p>For symptoms, causes and diagnosis, with sources, read <a href="/what-is-fibromyalgia/">What is fibromyalgia?</a>.</p>
+</article>
+<aside class="cta" aria-label="Get Betony">
+<img src="/img/icon.png" width="64" height="64" alt="">
+<div>
+<p class="cta-title">Betony: Symptom Tracker</p>
+<p>Log a day in under 30 seconds. No account, data stays on your iPhone.</p>
+<a class="button button-small" href="https://apps.apple.com/us/app/betony-symptom-tracker/id6813134795">Download on the App Store</a>
+</div>
+</aside>
 </main>
-<footer>
+<footer class="site-footer">
 <nav aria-label="Site">
 <ul>
 <li><a href="/">Home</a></li>
@@ -77,6 +95,5 @@
 </nav>
 <p class="small">Betony records what you log. It is not a medical device and does not give medical advice.</p>
 </footer>
-</div>
 </body>
 </html>

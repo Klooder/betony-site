@@ -28,5 +28,5 @@ Medications can be logged with optional reminders. Betony Pro turns your entries
 ## Private by design
 No account and no sign-up. Everything stays on your iPhone, and a CSV export is free. Read the [privacy policy](/privacy/).
 
-## Get Betony
-Betony is free on the [App Store](https://apps.apple.com/us/app/betony-symptom-tracker/id6813134795). To learn more about the condition itself, read [What is POTS?](/what-is-pots/)
+## About the condition
+For symptoms, causes and diagnosis, with sources, read [What is POTS?](/what-is-pots/).

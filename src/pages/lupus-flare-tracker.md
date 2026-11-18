@@ -28,5 +28,5 @@ Lupus usually means regular check-ups. Betony Pro turns your entries into a shor
 ## Private
 No account, no sign-up, nothing leaves your iPhone. Read the [privacy policy](/privacy/).
 
-## Get Betony
-Free on the [App Store](https://apps.apple.com/us/app/betony-symptom-tracker/id6813134795). For background on the condition, read [What is lupus?](/what-is-lupus/)
+## About the condition
+For symptoms, causes and diagnosis, with sources, read [What is lupus?](/what-is-lupus/).

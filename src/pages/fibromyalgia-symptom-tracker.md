@@ -28,5 +28,5 @@ Log medications with optional reminders. Betony Pro adds a doctor report and lon
 ## Private
 No account, data kept on your iPhone, free CSV export. Read the [privacy policy](/privacy/).
 
-## Get Betony
-Free on the [App Store](https://apps.apple.com/us/app/betony-symptom-tracker/id6813134795). For background on the condition, read [What is fibromyalgia?](/what-is-fibromyalgia/)
+## About the condition
+For symptoms, causes and diagnosis, with sources, read [What is fibromyalgia?](/what-is-fibromyalgia/).

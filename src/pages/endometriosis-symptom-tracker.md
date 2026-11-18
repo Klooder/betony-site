@@ -28,5 +28,5 @@ Betony Pro builds a report your doctor can read in a minute: top symptoms, flare
 ## Private
 No account, nothing sent anywhere, CSV export free. Read the [privacy policy](/privacy/).
 
-## Get Betony
-Free on the [App Store](https://apps.apple.com/us/app/betony-symptom-tracker/id6813134795). For background on the condition, read [What is endometriosis?](/what-is-endometriosis/)
+## About the condition
+For symptoms, causes and diagnosis, with sources, read [What is endometriosis?](/what-is-endometriosis/).

@@ -35,6 +35,108 @@ APP_STORE_URL = "https://apps.apple.com/us/app/betony-symptom-tracker/id68131347
 
 NAV = [("Home", ""), ("Guides", "guides/"), ("Privacy Policy", "privacy/"), ("Support", "support/")]
 
+CONDITIONS = [
+    ("POTS", "pots-symptom-tracker/", "what-is-pots/",
+     "Dizziness on standing, heart rate lying and standing, salt and fluids."),
+    ("Endometriosis", "endometriosis-symptom-tracker/", "what-is-endometriosis/",
+     "Pelvic and period pain, bleeding level, endo belly, cycle day."),
+    ("Fibromyalgia", "fibromyalgia-symptom-tracker/", "what-is-fibromyalgia/",
+     "Widespread pain, fibro fog, morning stiffness, sleep quality."),
+    ("Lupus", "lupus-flare-tracker/", "what-is-lupus/",
+     "Joint pain, rashes, fatigue, temperature, sun exposure."),
+    ("ME/CFS", "me-cfs-symptom-tracker/", "what-is-me-cfs/",
+     "PEM crashes, physical, mental and social exertion, morning energy."),
+]
+
+# The hero month: wellbeing 1-5 per day (None = not logged), "f" marks a flare day.
+# September 2026 starts on a Tuesday. Mirrors the app's Calendar tab.
+MONTH = "September"
+MONTH_OFFSET = 2
+DAYS = ["1f", "1f", "1f", "2", "3", "3", "3", None, "4", "4", "3", "3", "2f", "2f", "2f",
+        "2f", "3", "3", "4", "3", "3", None, None, "3", "4", "4", "4", "3", "1f", "2f"]
+
+
+def calendar() -> str:
+    cells = ['<span class="cal-head">' + d + "</span>" for d in "SMTWTFS"]
+    cells += ['<span class="cal-day cal-pad"></span>'] * MONTH_OFFSET
+    for number, value in enumerate(DAYS, start=1):
+        if value is None:
+            cells.append(f'<span class="cal-day cal-empty" style="--i:{number}">{number}</span>')
+            continue
+        flare = " cal-flare" if value.endswith("f") else ""
+        cells.append(f'<span class="cal-day w{value[0]}{flare}" style="--i:{number}">{number}</span>')
+    logged = sum(1 for d in DAYS if d)
+    flares = sum(1 for d in DAYS if d and d.endswith("f"))
+    label = (f"Example month in Betony's calendar: {logged} of {len(DAYS)} days logged, "
+             f"{flares} flare days, {len(DAYS) - logged} days left empty.")
+    legend = ('<p class="cal-legend" aria-hidden="true"><span class="cal-ramp">'
+              + "".join(f'<i class="w{i}"></i>' for i in range(1, 6))
+              + '</span>Wellbeing 1–5 <span class="cal-flare-key"></span>Flare</p>')
+    return (f'<figure class="cal" role="img" aria-label="{label}">\n'
+            f'<p class="cal-month" aria-hidden="true">{MONTH}</p>\n'
+            f'<div class="cal-grid" aria-hidden="true">{"".join(cells)}</div>\n{legend}\n'
+            '<figcaption>Three days are empty. Betony leaves them empty: no streaks, no reminders about gaps.</figcaption>\n'
+            '</figure>')
+
+
+def shot(name: str, alt: str) -> str:
+    return (f'<picture><source srcset="/img/{name}-dark.jpg" media="(prefers-color-scheme: dark)">'
+            f'<img src="/img/{name}-light.jpg" width="640" height="1391" alt="{html.escape(alt)}" loading="lazy"></picture>')
+
+
+def app_store_button(extra: str = "") -> str:
+    return f'<a class="button{extra}" href="{APP_STORE_URL}">Download on the App Store</a>'
+
+
+def home() -> str:
+    rows = "\n".join(
+        f'<li><h3>{name}</h3><p>{what}</p>'
+        f'<p class="cond-links"><a href="/{guide}">{name} tracker</a><a href="/{article}">What is {name if name.isupper() or "/" in name else name.lower()}?</a></p></li>'
+        for name, guide, article, what in CONDITIONS)
+    return f"""<section class="hero">
+<div class="hero-text">
+<h1>A symptom diary built for flare days.</h1>
+<p class="lede">Betony is a symptom tracker for chronic illness: POTS, endometriosis, fibromyalgia, lupus, ME/CFS. A full day takes under 30 seconds to log, with big buttons and no typing.</p>
+<p class="hero-cta">{app_store_button()}<span class="small">Free on iPhone. Optional Pro upgrade.</span></p>
+</div>
+{calendar()}
+</section>
+
+<section class="promises" aria-label="How Betony works">
+<div><h2>Under 30 seconds</h2><p>Tap a number for each symptom and you are done. Nothing has to be typed.</p></div>
+<div><h2>Nothing is mandatory</h2><p>Skip any field. A symptom you leave alone counts as not logged, never as zero.</p></div>
+<div><h2>Stays on your iPhone</h2><p>No account, no sign-up, no analytics. Export everything to CSV for free.</p></div>
+</section>
+
+<section class="shots" aria-labelledby="shots-title">
+<h2 id="shots-title"><span>Log the day, see the month, take a report to your doctor</span></h2>
+<div class="shots-row">
+<figure>{shot("1-today", "Betony's Today screen: overall wellbeing from 1 to 5, a flare day toggle and a list of symptoms with severity")}<figcaption>Today: wellbeing, flare day, symptoms.</figcaption></figure>
+<figure>{shot("3-trends-90d", "Betony's Trends screen: 90 days of dizziness with each day's real high and low")}<figcaption>Trends: real highs and lows, never averaged away.</figcaption></figure>
+<figure>{shot("4-report-preview", "Betony's Report screen: a preview of a printable symptom report with charts per symptom")}<figcaption>Report: a summary your doctor can read in a minute. Pro.</figcaption></figure>
+</div>
+</section>
+
+<section class="conditions" aria-labelledby="cond-title">
+<h2 id="cond-title">Set up for your condition</h2>
+<p>Pick a condition during setup and Betony fills in symptoms, numbers and triggers that people with it tend to track. Change any of it later.</p>
+<ul class="cond-list">
+{rows}
+</ul>
+</section>
+"""
+
+
+def cta(meta: dict) -> str:
+    return f"""<aside class="cta" aria-label="Get Betony">
+<img src="/img/icon.png" width="64" height="64" alt="">
+<div>
+<p class="cta-title">Betony: Symptom Tracker</p>
+<p>Log a day in under 30 seconds. No account, data stays on your iPhone.</p>
+{app_store_button(" button-small")}
+</div>
+</aside>"""
+
 
 def inline(text: str) -> str:
     escaped = html.escape(text, quote=False)
@@ -108,18 +210,27 @@ def dateline(meta: dict) -> str:
 
 def page(meta: dict, markdown: str) -> str:
     is_404 = meta["path"] == "404"
+    is_home = meta["path"] == ""
+    kind = meta.get("kind")
     url = SITE_URL + ("" if is_404 else meta["path"])
-    content = body(markdown)
-    # The date line goes right under the page heading.
-    content = re.sub(r"(</h1>\n)", lambda m: m.group(1) + dateline(meta), content, count=1)
+    if is_home:
+        content = home()
+    else:
+        content = body(markdown)
+        # The date line goes right under the page heading.
+        content = re.sub(r"(</h1>\n)", lambda m: m.group(1) + dateline(meta), content, count=1)
+        content = f'<article class="prose">\n{content}\n</article>'
+        if kind:
+            content += "\n" + cta(meta)
     nav = "\n".join(f'<li><a href="/{p}">{name}</a></li>' for name, p in NAV)
     seo = "" if is_404 else (
         f'<link rel="canonical" href="{url}">\n'
-        f'<meta property="og:type" content="{"article" if meta.get("kind") else "website"}">\n'
+        f'<meta property="og:type" content="{"article" if kind else "website"}">\n'
         f'<meta property="og:site_name" content="{SITE_NAME}">\n'
         f'<meta property="og:title" content="{html.escape(meta["title"])}">\n'
         f'<meta property="og:description" content="{html.escape(meta["description"])}">\n'
         f'<meta property="og:url" content="{url}">\n'
+        f'<meta property="og:image" content="{SITE_URL}img/1-today-light.jpg">\n'
         f'<meta name="apple-itunes-app" content="app-id=6813134795">\n'
         + structured_data(meta, url))
     robots = '<meta name="robots" content="noindex">\n' if is_404 else ""
@@ -129,19 +240,26 @@ def page(meta: dict, markdown: str) -> str:
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#FAF6F0" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#181611" media="(prefers-color-scheme: dark)">
 <meta name="description" content="{html.escape(meta['description'])}">
 {robots}<title>{html.escape(meta['title'])}</title>
-{seo}<link rel="stylesheet" href="/styles.css">
+{seo}<link rel="icon" href="/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;700;800&display=swap">
+<link rel="stylesheet" href="/styles.css">
 </head>
-<body>
-<div class="page">
-<header>
-<a class="site-name" href="/">{SITE_NAME}</a>
+<body class="{'home' if is_home else 'inner'}">
+<header class="site-header">
+<a class="brand" href="/"><img src="/img/icon.png" width="36" height="36" alt="">Betony</a>
+<nav aria-label="Main"><a href="/guides/">Guides</a><a class="button button-small" href="{APP_STORE_URL}">Get the app</a></nav>
 </header>
 <main>
 {content}
 </main>
-<footer>
+<footer class="site-footer">
 <nav aria-label="Site">
 <ul>
 {nav}
@@ -149,7 +267,6 @@ def page(meta: dict, markdown: str) -> str:
 </nav>
 <p class="small">Betony records what you log. It is not a medical device and does not give medical advice.</p>
 </footer>
-</div>
 </body>
 </html>
 """

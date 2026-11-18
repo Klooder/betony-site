@@ -28,5 +28,5 @@ Betony Pro builds a report from your entries: top symptoms, flare days and medic
 ## Private
 No account, data stays on your iPhone, free CSV export. Read the [privacy policy](/privacy/).
 
-## Get Betony
-Free on the [App Store](https://apps.apple.com/us/app/betony-symptom-tracker/id6813134795). For background on the condition, read [What is ME/CFS?](/what-is-me-cfs/)
+## About the condition
+For symptoms, causes and diagnosis, with sources, read [What is ME/CFS?](/what-is-me-cfs/).
